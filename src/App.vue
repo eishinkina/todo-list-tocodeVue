@@ -3,35 +3,31 @@
     <div class="wrapper-content">
       <section>
         <div class="container">
-          <div>
-            <h1>{{ title }}</h1>
-            <div class="message" v-if="message">
-              <p>{{ message }}</p>
-            </div>
-            <!-- //new-note -->
-            <div class="new-note">
-              <input
-                v-model="note.title"
-                type="text"
-                placeholder="введите заметку"
-              />
-              <textarea
-                v-model="note.descr"
-                placeholder="введите описание"
-              ></textarea>
-              <button @click="addNote">Новая заметка</button>
-            </div>
+          <h1>{{ title }}</h1>
+          <MessageBar v-if="message" :message="message" />
+          <!-- //new-note -->
+          <div class="new-note">
+            <input
+              v-model="note.title"
+              type="text"
+              placeholder="введите заметку"
+            />
+            <textarea
+              v-model="note.descr"
+              placeholder="введите описание"
+            ></textarea>
+            <button @click="addNote">Новая заметка</button>
+          </div>
 
-            <!-- //note-list -->
-            <div class="notes">
-              <div class="note" v-for="(note, index) in notes" :key="index">
-                <div class="note-header">
-                  <p>{{ note.title }}</p>
-                </div>
-                <div class="note-body">
-                  <p>{{ note.descr }}</p>
-                  <span>{{ formatRussianDate(note.date) }}</span>
-                </div>
+          <!-- //note-list -->
+          <div class="notes">
+            <div class="note" v-for="(note, index) in notes" :key="index">
+              <div class="note-header">
+                <p>{{ note.title }}</p>
+              </div>
+              <div class="note-body">
+                <p>{{ note.descr }}</p>
+                <span>{{ formatRussianDate(note.date) }}</span>
               </div>
             </div>
           </div>
@@ -42,7 +38,11 @@
 </template>
 
 <script>
+import MessageBar from "./components/MessageBar.vue";
 export default {
+  components: {
+    MessageBar,
+  },
   data() {
     return {
       title: "Приложение для заметок",
