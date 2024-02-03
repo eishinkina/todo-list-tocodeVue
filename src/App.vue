@@ -3,34 +3,11 @@
     <div class="wrapper-content">
       <section>
         <div class="container">
-          <h1>{{ title }}</h1>
+          <h1 class="title">{{ title }}</h1>
           <MessageBar v-if="message" :message="message" />
-          <!-- //new-note -->
-          <div class="new-note">
-            <input
-              v-model="note.title"
-              type="text"
-              placeholder="введите заметку"
-            />
-            <textarea
-              v-model="note.descr"
-              placeholder="введите описание"
-            ></textarea>
-            <button @click="addNote">Новая заметка</button>
-          </div>
-
+          <NewNotes :note="note" @addNote="addNote" />
           <!-- //note-list -->
-          <div class="notes">
-            <div class="note" v-for="(note, index) in notes" :key="index">
-              <div class="note-header">
-                <p>{{ note.title }}</p>
-              </div>
-              <div class="note-body">
-                <p>{{ note.descr }}</p>
-                <span>{{ formatRussianDate(note.date) }}</span>
-              </div>
-            </div>
-          </div>
+          <NotesBar :notes="notes" :format="formatRussianDate" />
         </div>
       </section>
     </div>
@@ -39,9 +16,13 @@
 
 <script>
 import MessageBar from "./components/MessageBar.vue";
+import NewNotes from "./components/NewNotes.vue";
+import NotesBar from "./components/NotesBar.vue";
 export default {
   components: {
     MessageBar,
+    NewNotes,
+    NotesBar,
   },
   data() {
     return {
@@ -82,23 +63,24 @@ export default {
         second: "2-digit",
       });
     },
-    addNote() {
-      let { title, descr } = this.note;
-      if (title === "") {
+    addNote(newNote) {
+      if (newNote.title === "") {
         this.message = "Введите название заметки";
         return false;
       }
       this.notes.push({
-        title,
-        descr,
+        ...newNote,
         date: new Date(),
       });
       this.message = null;
-      this.note.title = "";
-      this.note.descr = "";
     },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+</style>
