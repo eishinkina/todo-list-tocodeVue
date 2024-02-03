@@ -7,7 +7,7 @@
           <MessageBar v-if="message" :message="message" />
           <NewNotes :note="note" @addNote="addNote" />
           <!-- //note-list -->
-          <NotesBar :notes="notes" :format="formatRussianDate" />
+          <NotesBar :notes="notes" :format="formatRussianDate" @removeNote="removeNote"/>
         </div>
       </section>
     </div>
@@ -73,6 +73,9 @@ export default {
         date: new Date(),
       });
       this.message = null;
+    },
+    removeNote(index) {
+      this.notes.splice(index, 1);
     },
   },
 };
