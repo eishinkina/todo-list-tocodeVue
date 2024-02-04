@@ -7,6 +7,11 @@
           <NewNotes :note="note" @addNote="addNote" />
           <div class="note-header">
             <h1>{{ title }}</h1>
+            <SearchBar
+              :value="search"
+              placeholder="Найти вашу заметку"
+              @search="search = $event"
+            />
             <div class="icons">
               <svg
                 :class="{ active: grid }"
@@ -50,7 +55,7 @@
           </div>
 
           <NotesBar
-            :notes="notes"
+            :notes="notesFiltered"
             :format="formatRussianDate"
             @removeNote="removeNote"
             :grid="grid"
@@ -65,17 +70,20 @@
 import MessageBar from "./components/MessageBar.vue";
 import NewNotes from "./components/NewNotes.vue";
 import NotesBar from "./components/NotesBar.vue";
+import SearchBar from "./components/SearchBar.vue";
 export default {
   components: {
     MessageBar,
     NewNotes,
     NotesBar,
+    SearchBar,
   },
   data() {
     return {
       title: "Приложение для заметок",
       message: null,
       grid: true,
+      search: "",
       note: {
         title: "",
         descr: "",
@@ -124,6 +132,13 @@ export default {
     },
     removeNote(index) {
       this.notes = this.notes.filter((note, i) => i !== index);
+    },
+  },
+  computed: {
+    notesFiltered() {
+      return this.notes.filter((note) => {
+        return note.title.toLowerCase().includes(this.search.toLowerCase());
+      });
     },
   },
 };
