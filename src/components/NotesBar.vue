@@ -5,7 +5,7 @@
         class="note"
         v-for="(note, index) in notes"
         :key="index"
-        :class="{ full: !grid }"
+        :class="{ full: !grid, green: note.type == 2, red: note.type == 3 }"
       >
         <div class="note-header">
           <p>{{ note.title }}</p>

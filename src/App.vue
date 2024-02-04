@@ -5,13 +5,14 @@
         <div class="container">
           <MessageBar v-if="message" :message="message" />
           <NewNotes :note="note" @addNote="addNote" />
+          <SearchBar
+            :value="search"
+            placeholder="Найти вашу заметку"
+            @search="search = $event"
+          />
           <div class="note-header">
             <h1>{{ title }}</h1>
-            <SearchBar
-              :value="search"
-              placeholder="Найти вашу заметку"
-              @search="search = $event"
-            />
+
             <div class="icons">
               <svg
                 :class="{ active: grid }"
@@ -87,22 +88,26 @@ export default {
       note: {
         title: "",
         descr: "",
+        type: "1",
       },
       notes: [
         {
           title: "Первая заметка",
           descr: "Описание первой заметки",
           date: new Date(),
+          type: 1,
         },
         {
           title: "Вторая заметка",
           descr: "Описание второй заметки",
           date: new Date(),
+          type: 2,
         },
         {
           title: "Третья заметка",
           descr: "Описание третьей заметки",
           date: new Date(),
+          type: 3,
         },
       ],
     };
@@ -148,5 +153,12 @@ export default {
 h1 {
   font-size: 32px;
   color: #999;
+}
+
+.green {
+  border: 1px solid green;
+}
+.red {
+  border: 1px solid red;
 }
 </style>

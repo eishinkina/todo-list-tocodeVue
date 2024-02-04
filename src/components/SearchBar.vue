@@ -51,7 +51,7 @@ svg {
 }
 .search-icon {
   height: 100%;
-  padding-left: 16px;
+  padding-left: 460px;
   padding-right: 16px;
   align-items: center;
   display: flex;
@@ -62,8 +62,11 @@ input {
   border-radius: 30px;
   color: #909399;
   font-size: 16px;
-  min-width: 400px;
+  max-width: 400px;
   height: auto;
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 30px;
 }
 
 </style>
