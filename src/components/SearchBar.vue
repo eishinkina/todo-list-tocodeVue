@@ -47,7 +47,7 @@ svg {
   top: 0px;
   bottom: 0px;
   left: 0px;
-  position: absolute;
+  /* position: absolute; */
 }
 .search-icon {
   height: 100%;
@@ -55,6 +55,8 @@ svg {
   padding-right: 16px;
   align-items: center;
   display: flex;
+  position: absolute;
+  z-index: 10;
 }
 input {
   padding: 16px 16px 16px 56px !important;
@@ -67,6 +69,7 @@ input {
   margin: 0 auto;
   display: flex;
   margin-bottom: 30px;
+  position: relative;
 }
 
 </style>
